@@ -44,4 +44,11 @@ class User
         $result = $this->conn->query($sql);
         return $result;
     }
+
+    public function hapus($id){
+        $sql = "DELETE FROM $this->table WHERE id = " . $id;
+        $result = $this->conn->query($sql);
+
+        return $result;
+    }
 }
