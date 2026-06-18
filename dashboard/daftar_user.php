@@ -1,6 +1,6 @@
 <?php
-include '../users.php';
-include '../database.php';
+require_once '../users.php';
+require_once '../database.php';
 
 $db = new Database();
 $conn = $db->connect();
@@ -13,17 +13,10 @@ if ($result) {
 }
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <h1 class="mt-4 mb-2">Daftar User</h1>
-          <div class="mb-3">
-            <a href="index.php?halaman=tambah_user_form.php" class="btn btn-sm btn-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus-circle me-1" viewBox="0 0 16 16" style="vertical-align: text-top;">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-              </svg>
-              Tambah User
-            </a>
-          </div>
+          <h1 class= "mt-4"> Daftar User </h1>
+          
           <hr />
+          <a href="index.php?halaman=tambah_user_form.php" class="btn btn-sm btn-primary mb-3">Tambah User</a>
           <div class="table-responsive small">
             <table class="table table-striped table-sm">
               <thead>
@@ -45,7 +38,8 @@ if ($result) {
                   <td><?php echo $row['EMAIL']; ?></td>
                   <td><?php echo $row['ASAL']; ?></td>
                   <td>
-                    <a href="delete_user.php?id=<?php echo $row['ID']; ?>">delete</a> | edit 
+                    <a href="delete_user.php?id=<?php echo $row['ID']; ?>">delete</a> 
+                    <a href="index.php?halaman=edit_user_form.php&id=<?php echo $row['ID']; ?>">edit</a>
                   </td>
                 </tr>
                 <?php

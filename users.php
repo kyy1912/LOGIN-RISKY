@@ -15,10 +15,11 @@ class User
         $sql = "INSERT INTO $this->table (username, email, asal, password) 
                 VALUES ('$username', '$email', '$asal', '$password')";
 
-        if ($this->conn->query($sql)) {
-            echo "Data berhasil ditambahkan <br>";
-        } else {
-            echo "Error: " . $this->conn->error;
+        try {
+            $this->conn->query($sql);
+            return true;
+        } catch (mysqli_sql_exception $e) {
+            throw $e;
         }
     }
 
@@ -50,5 +51,20 @@ class User
         $result = $this->conn->query($sql);
 
         return $result;
+
     }
+
+    public function ambilUserdariId($id){
+        $sql = "SELECT * FROM $this->table WHERE id = " . $id;
+        $result = $this->conn->query($sql);
+        return $result -> fetch_assoc();
+    }
+    
+    public function update($id, $username, $email, $asal, $password){
+        $sql = "UPDATE $this->table SET 
+        USERNAME = '$username', EMAIL = '$email', ASAL = '$asal', PASSWORD = '$password' WHERE ID = " . $id;
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
 }
