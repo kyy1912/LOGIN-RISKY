@@ -38,6 +38,23 @@ class User
         return false;
     }
 
+    public function incrementLoginCount($username) {
+        $stmt = $this->conn->prepare("UPDATE $this->table SET login_count = COALESCE(login_count, 0) + 1 WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        return $stmt->execute();
+    }
+
+    public function getLoginCount($username) {
+        $stmt = $this->conn->prepare("SELECT login_count FROM $this->table WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc()) {
+            return $row['login_count'];
+        }
+        return 0;
+    }
+
     // GET ALL USERS
     public function getAllUsers()
     {

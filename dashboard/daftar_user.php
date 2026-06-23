@@ -16,6 +16,11 @@ if ($result) {
           <h1 class= "mt-4"> Daftar User </h1>
           
           <hr />
+          <?php if(isset($_SESSION['is_logged_in']) && isset($_SESSION['username'])): ?>
+          <div class="alert alert-success" role="alert">
+            Selamat Datang <?php echo htmlspecialchars($_SESSION['username']); ?> Anda telah login sebanyak <?php echo isset($_SESSION['login_count']) ? $_SESSION['login_count'] : 1; ?> kali
+          </div>
+          <?php endif; ?>
           <a href="index.php?halaman=tambah_user_form.php" class="btn btn-sm btn-primary mb-3">Tambah User</a>
           <div class="table-responsive small">
             <table class="table table-striped table-sm">

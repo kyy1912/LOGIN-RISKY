@@ -19,11 +19,13 @@ if ($ditemukan == false) {
     header("Location: index.php");
     exit();
 } else {
+    $user->incrementLoginCount($username);
+    $login_count = $user->getLoginCount($username);
+    
     $_SESSION['is_logged_in'] = true;
     $_SESSION['username'] = $username;
+    $_SESSION['login_count'] = $login_count;
     header("Location: dashboard/index.php");
     exit();
-     echo "<h4>Username atau password salah!</h4>";
-
 }
 ?>
